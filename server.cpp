@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
  
 int sockfd, newsockfd, portno, n, k;
 unsigned int clien;
-k=0;
 char buffer[256];
 char bufferReverse[256];
 /*
@@ -41,9 +40,11 @@ bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
 
 listen(sockfd, 1);
 
-while(true){
-
 clien = sizeof(cli_addr);
+
+while(true){
+k = 0;
+
 newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clien);
 
 bzero(buffer,256);
@@ -61,8 +62,8 @@ n = write(newsockfd, bufferReverse, strlen(buffer));
 bzero(bufferReverse,256);
 
 close(newsockfd);
-}
 
+}
 close(sockfd);
 
 }
